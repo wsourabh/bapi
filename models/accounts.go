@@ -9,19 +9,19 @@ import (
 type (
 	Accounts struct {
 		Id  string `bson:"_id"`
-		created  string
-		updated  string
-		email string
-		wcd_guid string
-		name  *Name
-		country string
-		status string
+		Created  int64 `bson:"created"`
+		Updated  int64 `bson:"updated"`
+		Email string	`bson:"email"`
+		WcdGuid string `bson:"wcd_guid"`
+		Name  *Name `bson:"name"`
+		Country string `bson:"country"`
+		Status string `bson:"status"`
 	}
 
  	Name  struct {
-		full string
-		first string
-		last string
+		Full string `bson:"full"`
+		First string `bson:"first"`
+		Last string `bson:"last"`
 	}
 )
 
@@ -41,14 +41,14 @@ type (
 // Id doesn't exist
 func GetAccountsById(id string) (v *Accounts) {
 	session := singleton.sessions["dev"].DB("oz_development")
-	var results Accounts{}
+	result:= Accounts{}
 	c := session.C("accounts")
-	err := c.Find(bson.M{"_id": id}).One(&results)
+	err := c.Find(bson.M{"_id": id}).One(&result)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(results)
-	return &results[0]
+	fmt.Println(result)
+	return &result
 }
 
 // GetAllAccounts retrieves all Accounts matches certain condition. Returns empty list if

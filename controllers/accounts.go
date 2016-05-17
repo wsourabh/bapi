@@ -3,6 +3,7 @@ package controllers
 import (
 	"bapi/models"
 	"github.com/astaxie/beego"
+	"fmt"
 )
 
 // oprations for Accounts
@@ -24,6 +25,7 @@ func (c *AccountsController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	v := models.GetAccountsById(idStr)
 	c.Data["json"] = v
+	fmt.Println(v)
 	c.ServeJSON()
 }
 
